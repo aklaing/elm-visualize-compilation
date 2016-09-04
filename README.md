@@ -1,2 +1,2 @@
-# elm-build-progress-graph
+# elm-visualize-compilation
 Preprocessor creating an elm front-end for showing compilation progress.
