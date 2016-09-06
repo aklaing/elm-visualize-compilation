@@ -41,9 +41,12 @@ it demonstrates the ability to construct the graph page based on an
 arbitrary codebase, and to change the node colors dynamically in
 response to Msg's.
 
-Here is a [much larger example]() running the latest version on [Soren
-Debois' elm-mdl codebase](https://github.com/debois/elm-mdl), as of
-version 7.0.
+Here is a [much larger
+example](https://aklaing.github.io/elm-visualize-compilation/) running
+the latest version on [Soren Debois' elm-mdl
+codebase](https://github.com/debois/elm-mdl), as of version 7.0.  It
+may be helpful to use (Ctrl-'-') to reduce the graph size to fit in
+your browser window.
 
 Graph drawing is a subject of CS research as may be seen from [this
 paper](https://www.ocf.berkeley.edu/~eek/index.html/tiny_examples/thinktank/src/gv1.7c/doc/dotguide.pdf),
@@ -118,9 +121,10 @@ ready to be built.  Only 4 nodes can compile at the same time.  The
 rest are 'Ready' until they can compile.  The corresponding makefile
 target is 'sim'.
 
-`makefile` -- You can write a directory path in this makefile and call
-either the target 'sim' or 'compilerUi' to get whichver version of the
-program you want.
+`makefile` -- You can edit a directory path in this makefile and call
+either the target 'sim' or 'compilerUi' to get one of the two versions
+of the program, for any elm codebase you want (which must be locally
+installed on your machine).
 
 `Demo.elm`, `Demo.html`, `demo.js` -- older files that were used to
 create the gif, based on an earlier version of the script.
