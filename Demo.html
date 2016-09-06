@@ -1,0 +1,67 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Visualizing Compilation Demo</title>
+  <script type="text/javascript" src="demo.js"></script>
+</head>
+
+<body>
+  <h3>Visualizing Compilation</h3>
+  <div id="demo">&nbsp;</div>
+</body>
+
+<script type="text/javascript">
+
+/////////////////////////////////////////////////////////////////  
+
+var elmNode = document.getElementById('demo');
+var embeddedElmNode = Elm.Demo.embed(elmNode, null);
+
+/////////////////////////////////////////////////////////////////
+
+function randInt (randMax) {
+   return Math.floor((Math.random() * randMax));
+}
+
+// This javascript file just pretends to be the compiler for the
+// purposes of the demo, and loops through a compilation that fails at
+// the last stage.
+
+var progress = [
+["Common", "Unready", 0],
+["Colors", "Unready", 0],
+["Types", "Unready", 0],
+["Board", "Unready", 0],
+["Page", "Unready", 0],
+["Editor", "Unready", 2],
+["Common", "Ready", 0],
+["Colors", "Ready", 1],
+["Common", "Compiling", 0],
+["Colors", "Compiling", 2],
+["Common", "Succeeded", 0],
+["Types", "Compiling", 2],
+["Types", "Succeeded", 0],
+["Board", "Compiling", 2],
+["Colors", "Succeeded", 3],
+["Board", "Succeeded", 0],
+["Page", "Compiling", 3],
+["Page", "Failed", 5],
+];
+
+var progressIndex = 0;
+function runOnce() {
+   var fileValue = progress[progressIndex][0];
+   var newStateValue = progress[progressIndex][1];
+   var intervalValue = 1000 * progress[progressIndex][2];
+   progressIndex = (progressIndex + 1) % progress.length;
+   embeddedElmNode.ports.compilerUpdates.send(
+      {file: fileValue, state: newStateValue}
+   );
+   setTimeout(runOnce, intervalValue);
+}
+setTimeout(runOnce, 1000);
+
+</script>
+
+</html>
