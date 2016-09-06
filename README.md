@@ -70,7 +70,7 @@ the compiler to a running elm program somehow.
   not indicate that import from **C** to **A** in the graph.  This
   helps reduce clutter from the output graph, for complicated
   projects.  For this reason, the dependency output is preprocessed
-  with 'tred' before calling 'dot'.
+  with `tred` before calling `dot`.
 
 - In order to fit larger projects more easily in smaller spaces,
   compilation progress is from left to right, because dependencies
@@ -84,7 +84,7 @@ the compiler to a running elm program somehow.
   many code bases.  Since English text is written from left to right,
   more space is available for the latter case (the 19 nodes importing
   one) when the many children of **A** are displayed vertically.  This
-  is achieved by using the the 'rankdir=LR;' options.
+  is achieved by using the the `rankdir=LR;` options.
 
 - There are different options for the `splines` argument to dot, but
   personally I have found the `true` default to be most visually
@@ -112,17 +112,17 @@ graph in an index.html file.  If instead you build a js script and
 provide an index.html which implements the port on the javascript
 side, the elm program will respond to the events received through the
 port by changing node colors appropriately.  The corresponding
-makefile target is 'compilerUi'.
+makefile target is `compilerUi`.
 
 `SimulatorPreamble.elm` -- This is a simulation of a compilation.
 Random events are generated subject to the normal constraints that
 each node must have all of its dependencies built before it can become
 ready to be built.  Only 4 nodes can compile at the same time.  The
 rest are 'Ready' until they can compile.  The corresponding makefile
-target is 'sim'.
+target is `sim`.
 
 `makefile` -- You can edit a directory path in this makefile and call
-either the target 'sim' or 'compilerUi' to get one of the two versions
+either the target `sim` or `compilerUi` to get one of the two versions
 of the program, for any elm codebase you want (which must be locally
 installed on your machine).
 
