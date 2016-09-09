@@ -46,28 +46,18 @@ example](https://aklaing.github.io/elm-visualize-compilation/) running
 the latest version on [Soren Debois' elm-mdl
 codebase](https://github.com/debois/elm-mdl), as of version 7.0.  It
 may be helpful to use (Ctrl-'-') to reduce the graph size to fit in
-your browser window.
+your browser window.  It is running a simulated compilation.
 
-Graph drawing is a subject of CS research as may be seen from [this
+More information on graph drawing is available from [this
 paper](https://www.ocf.berkeley.edu/~eek/index.html/tiny_examples/thinktank/src/gv1.7c/doc/dotguide.pdf),
-its references and any other papers that cite this.  I believe that
-treating `dot` as a blackbox means the license does not matter.  On
-the other hand, by not implementing my own layout library, I am not
-being helpful to someone who may want to do graph layout for a
-different elm application, or may not want to install python -- I
-realize that.  Anyway, it is what it is, but I hope this
-implementation will contribute something to the effort.
-
-To make this a useful tool, what remains to be done is the generation
-of the progress events from the compiler.  And communicating them from
-the compiler to a running elm program somehow.
+its references and any other papers that cite it.
 
 #### Notes on Graph Layout with dot:
 
 - For this application, it is not valuable in my opinion to display
   transitive edges.  Eg.  If **C** depends on **B** and **B** depends
   on **A**, but **C** also directly imports **A**, the program will
-  not indicate that import from **C** to **A** in the graph.  This
+  not indicate the dependence of **C** on **A** in the graph.  This
   helps reduce clutter from the output graph, for complicated
   projects.  For this reason, the dependency output is preprocessed
   with `tred` before calling `dot`.
@@ -84,12 +74,12 @@ the compiler to a running elm program somehow.
   many code bases.  Since English text is written from left to right,
   more space is available for the latter case (the 19 nodes importing
   one) when the many children of **A** are displayed vertically.  This
-  is achieved by using the the `rankdir=LR;` options.
+  is achieved by using the the `rankdir=LR;` option.
 
 - There are different options for the `splines` argument to dot, but
   personally I have found the `true` default to be most visually
   pleasing.  It is possible to allow the end-user to choose what type
-  of arrows they want and pass that through to `dot`.
+  of arrows they want and pass that option through to `dot`.
 
 #### Limitations:
 
@@ -97,9 +87,14 @@ the compiler to a running elm program somehow.
 
 - You need to have dot and python installed on your path somewhere.
 
-- It creates temporary files called .ReducedDigraph.elm, .digraph.dot,
-  .reduced-digraph.dot, .reduced-digraph.svg.  This can be refined to
-  use real temp files in `/tmp`.
+- It creates temporary files called `.ReducedDigraph.elm`,
+  `.digraph.dot`, `.reduced-digraph.dot`, `.reduced-digraph.svg`.
+  This can be refined to use real temp files in `/tmp`.
+
+- It currently only processes module and import declarations to
+  determine graph structure.  In particular, elm files that do not
+  contain any of these will not appear in the graph.  This is fairly
+  easy to fix.
 
 #### Files:
 
